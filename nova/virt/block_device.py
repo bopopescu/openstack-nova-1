@@ -401,9 +401,13 @@ class DriverImageBlockDevice(DriverVolumeBlockDevice):
                virt_driver, wait_func=None, do_check_attach=True):
         if not self.volume_id:
             av_zone = _get_volume_create_az_value(instance)
+            volume_type = None
+            if self['boot_index'] ==0 and context['volume_type']:
+                volume_type = context['volume_type']
             vol = volume_api.create(context, self.volume_size,
                                     '', '', image_id=self.image_id,
-                                    availability_zone=av_zone)
+                                    availability_zone=av_zone,
+                                    volume_type=volume_type)
             if wait_func:
                 self._call_wait_func(context, wait_func, volume_api, vol['id'])
 
