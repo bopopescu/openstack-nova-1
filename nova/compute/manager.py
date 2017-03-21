@@ -2034,6 +2034,7 @@ class ComputeManager(manager.Manager):
         image_name = image.get('name')
         self._notify_about_instance_usage(context, instance, 'create.start',
                 extra_usage_info={'image_name': image_name})
+        context['volume_type'] = filter_properties['volume_type']
         try:
             rt = self._get_resource_tracker(node)
             with rt.instance_claim(context, instance, limits):
