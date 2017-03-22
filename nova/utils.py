@@ -94,7 +94,7 @@ utils_opts = [
 
 workarounds_opts = [
     cfg.BoolOpt('disable_rootwrap',
-                default=True,
+                default=False,
                 help='This option allows a fallback to sudo for performance '
                      'reasons. For example see '
                      'https://bugs.launchpad.net/nova/+bug/1415106'),
