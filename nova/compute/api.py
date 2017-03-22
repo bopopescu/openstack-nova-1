@@ -1103,6 +1103,14 @@ class API(base.Base):
 
         return objects.InstanceGroup.get_by_uuid(context, group_hint)
 
+    def _get_root_volume_type(self, bdms):
+        for bdm in bdms:
+            if bdm['source_type'] == 'image' and
+                  bdm['destination_type'] == 'volume' and
+                  bdm['boot_index'] == 0:
+                return bdm['volume_type'] if bdm['volume_type'] else None
+        return None
+
     def _create_instance(self, context, instance_type,
                image_href, kernel_id, ramdisk_id,
                min_count, max_count,
@@ -1156,6 +1164,10 @@ class API(base.Base):
                         {'max_count': max_count,
                          'max_net_count': max_net_count})
             max_count = max_net_count
+
+        # get volume type and save it in filter_properties
+        filter_properties['volume_type'] = self._get_root_volume_type(
+            block_device_mapping)
 
         block_device_mapping = self._check_and_transform_bdm(context,
             base_options, instance_type, boot_meta, min_count, max_count,

@@ -61,6 +61,11 @@ block_device_mapping_new_item = {
         'type': ['integer', 'string', 'null'],
         'pattern': '^-?[0-9]+$',
     },
+    # Defined as varchar(255) in column "volume_type" in table
+    # "block_device_mapping"
+    'volume_type': {
+        'type': 'string', 'maxLength': 255,
+    },
 }
 
 block_device_mapping = copy.deepcopy(
