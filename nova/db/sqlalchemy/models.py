@@ -606,6 +606,7 @@ class BlockDeviceMapping(BASE, NovaBase, models.SoftDeleteMixin):
 
     volume_id = Column(String(36))
     volume_size = Column(Integer)
+    volume_type = Column(String(36))
 
     image_id = Column(String(36))
 

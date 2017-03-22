@@ -395,18 +395,16 @@ class DriverSnapshotBlockDevice(DriverVolumeBlockDevice):
 class DriverImageBlockDevice(DriverVolumeBlockDevice):
 
     _valid_source = 'image'
-    _proxy_as_attr = set(['volume_size', 'volume_id', 'image_id'])
+    _proxy_as_attr = set(['volume_size', 'volume_id', 'image_id', 'volume_type'])
 
     def attach(self, context, instance, volume_api,
                virt_driver, wait_func=None, do_check_attach=True):
         if not self.volume_id:
             av_zone = _get_volume_create_az_value(instance)
-            volume_type = context['volume_type'] if self['boot_index'] ==0 \
-                          and context['volume_type'] else None
             vol = volume_api.create(context, self.volume_size,
                                     '', '', image_id=self.image_id,
                                     availability_zone=av_zone,
-                                    volume_type=volume_type)
+                                    volume_type=self.volume_type)
             if wait_func:
                 self._call_wait_func(context, wait_func, volume_api, vol['id'])
 
