@@ -79,7 +79,7 @@ utils_opts = [
                default='month',
                help='Time period to generate instance usages for.  '
                     'Time period must be hour, day, month or year'),
-    cfg.BoolOpt('use_rootwrap_daemon', default=False,
+    cfg.BoolOpt('use_rootwrap_daemon', default=True,
                 help="Start and use a daemon that can run the commands that "
                      "need to be run with root privileges. This option is "
                      "usually enabled on nodes that run nova compute "
