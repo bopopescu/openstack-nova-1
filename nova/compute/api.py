@@ -1105,9 +1105,9 @@ class API(base.Base):
 
     def _get_root_volume_type(self, bdms):
         for bdm in bdms:
-            if bdm['source_type'] == 'image' and
-                  bdm['destination_type'] == 'volume' and
-                  bdm['boot_index'] == 0:
+            if bdm['source_type'] == 'image' and \
+                bdm['destination_type'] == 'volume' and \
+                bdm['boot_index'] == 0:
                 return bdm['volume_type'] if bdm['volume_type'] else None
         return None
 
