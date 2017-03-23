@@ -79,7 +79,7 @@ utils_opts = [
                default='month',
                help='Time period to generate instance usages for.  '
                     'Time period must be hour, day, month or year'),
-    cfg.BoolOpt('rootwrap_sudo_command',
+    cfg.StrOpt('rootwrap_sudo_command',
                 default='sudo',
                 help='Customized sudo command against rootwrap'),
     cfg.BoolOpt('use_rootwrap_daemon', default=False,
