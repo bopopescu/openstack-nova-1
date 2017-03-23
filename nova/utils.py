@@ -252,7 +252,7 @@ def vpn_ping(address, port, timeout=0.05, session_id=None):
 def get_root_helper():
     if CONF.disable_sudo_rootwrap:
         cmd = ''
-    if CONF.workarounds.disable_rootwrap:
+    elif CONF.workarounds.disable_rootwrap:
         cmd = 'sudo'
     else:
         cmd = 'sudo nova-rootwrap %s' % CONF.rootwrap_config
