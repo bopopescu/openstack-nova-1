@@ -79,9 +79,9 @@ utils_opts = [
                default='month',
                help='Time period to generate instance usages for.  '
                     'Time period must be hour, day, month or year'),
-    cfg.BoolOpt('disable_sudo_rootwrap',
-                default=True,
-                help='Run commands without sudo rootwrap'),
+    cfg.BoolOpt('rootwrap_sudo_command',
+                default='sudo',
+                help='Customized sudo command against rootwrap'),
     cfg.BoolOpt('use_rootwrap_daemon', default=False,
                 help="Start and use a daemon that can run the commands that "
                      "need to be run with root privileges. This option is "
@@ -250,12 +250,10 @@ def vpn_ping(address, port, timeout=0.05, session_id=None):
 
 
 def get_root_helper():
-    if CONF.disable_sudo_rootwrap:
-        cmd = ''
-    elif CONF.workarounds.disable_rootwrap:
-        cmd = 'sudo'
+    if CONF.workarounds.disable_rootwrap:
+        cmd = CONF.rootwrap_sudo_command
     else:
-        cmd = 'sudo nova-rootwrap %s' % CONF.rootwrap_config
+        cmd = '%s nova-rootwrap %s' % (CONF.rootwrap_sudo_command, CONF.rootwrap_config)
     return cmd
 
 
