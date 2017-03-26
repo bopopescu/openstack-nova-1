@@ -79,9 +79,6 @@ utils_opts = [
                default='month',
                help='Time period to generate instance usages for.  '
                     'Time period must be hour, day, month or year'),
-    cfg.StrOpt('rootwrap_sudo_command',
-                default='sudo',
-                help='Customized sudo command against rootwrap'),
     cfg.BoolOpt('use_rootwrap_daemon', default=False,
                 help="Start and use a daemon that can run the commands that "
                      "need to be run with root privileges. This option is "
@@ -101,6 +98,9 @@ workarounds_opts = [
                 help='This option allows a fallback to sudo for performance '
                      'reasons. For example see '
                      'https://bugs.launchpad.net/nova/+bug/1415106'),
+    cfg.StrOpt('rootwrap_sudo_command',
+                default='sudo',
+                help='Customized sudo command against rootwrap'),
     cfg.BoolOpt('disable_libvirt_livesnapshot',
                 default=True,
                 help='When using libvirt 1.2.2 live snapshots fail '
